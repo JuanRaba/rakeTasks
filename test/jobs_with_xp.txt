@@ -1,3 +1,7 @@
+#####################
+###  calc_xp(eng) ###
+#####################
+
 {"id"=>1, "name"=>"Chris Bosh", "jobs"=>[{"employer"=>"emp1", "start_date"=>"1990-02-22", "end_date"=>"1991-01-09"},
  {"employer"=>"emp2", "start_date"=>"1990-10-02", "end_date"=>"1995-04-04"},
  {"employer"=>"emp3", "start_date"=>"2000-03-18", "end_date"=>"2002-07-12"},
@@ -48,3 +52,17 @@
  {"employer"=>"emp1", "start_date"=>"2011-01-19", "end_date"=>nil},
  {"employer"=>"emp1", "start_date"=>"2016-02-11", "end_date"=>"2016-03-18"}]}
 [9, "Larry Page", 8220]
+
+###############################################################
+######## gtask_calculatexp_for_DBengineers_fromDBjobs #########
+###############################################################
+
+20 Chris Bosh 20 6245
+21 Jack Dorsey 21 6471
+22 Bill Gates 22 6791
+23 Drew Houston 23 0
+24 Gabe Newell 24 1
+25 Ruchi Sanghvi 25 1
+26 Mark Zuckerberg 26 6177
+27 Linus Torvalds 27 11444
+28 Larry Page 28 8220

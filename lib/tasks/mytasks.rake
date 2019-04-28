@@ -42,11 +42,66 @@ namespace :mytasks do
     #Job.destroy_all
     #store_jobs(@eng1)
 
-    gtask_store_jobs_for_DBengineers!(api)
+    #gtask_store_jobs_for_DBengineers!(api)
+    gtask_calculatexp_for_DBengineers_fromDBjobs
 
     puts ''
     puts "wololo"
   end
+end
+
+def gtask_calculatexp_for_DBengineers_fromDBjobs
+  Engineer.all.each do |engineer| # make this paralel with Active Jobs
+    xp = calc_xp_for_DBengineer(engineer)
+    puts "#{engineer.id} #{engineer.name} #{engineer.id} #{xp}"
+  end
+end
+
+def calc_xp_for_DBengineer(engineer)
+  calc_xp_fromDBjobs(engineer.jobs) # ENSURE JOBS ordered by start_date
+end
+
+def calc_xp_fromDBjobs(jobs)
+  #DB gives date formated start and end values
+  #initialize variables
+  xp = 0
+  day0 = "1970-01-01"
+  last_date = Date.parse day0
+  #config variable 
+  max_date_str = "2018-12-31"
+  max_date = Date.parse max_date_str
+
+  # ENSURE EMPLOYEMENT DATES AT THIS POINT  
+  jobs.each do |job|
+    # get data
+    start_date = job["start_date"]
+    end_date = job["end_date"]
+
+    start_date = max_date if start_date > max_date
+
+    if end_date == nil
+      end_date = max_date # Date.today.to_s
+    end      
+    end_date = max_date if end_date > max_date   
+
+    # EMPLOYEMENT DATE MUST BE ORDERED AT THIS POINT
+    if last_date < start_date
+      #puts "added xp empl separated"
+      xp += (end_date - start_date).to_i
+      last_date = end_date
+    else
+      #puts "emp overlaped"
+      start_date = last_date  
+      if start_date < end_date
+        #puts "added xp as not overlaped with last end"
+        xp += (end_date - start_date).to_i
+        last_date = end_date
+      else
+        #puts "skiped xp cause overlaped"
+      end
+    end
+  end
+  xp
 end
 
 def gtask_store_jobs_for_DBengineers!(api)
