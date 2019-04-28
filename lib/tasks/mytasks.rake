@@ -39,8 +39,20 @@ namespace :mytasks do
     print @eng1["jobs"].first.keys # ["employer", "start_date", "end_date"]
     puts '' 
     @eng1["jobs"].each do |job|
-      puts job["start_date"] + " " job["end_date"]
+      start_date = job["start_date"]
+      end_date = job["end_date"]
+      if end_date == nil
+        end_date = Date.today.to_s   
+      end
+      puts start_date + " " + end_date
+
+      start_date = Date.parse start_date
+      end_date = Date.parse end_date 
+      puts start_date
+      puts end_date
+      puts (end_date - start_date).to_i
     end
+
     puts "wololo"
   end
 end
