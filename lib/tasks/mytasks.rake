@@ -39,11 +39,22 @@ namespace :mytasks do
     puts '' 
     print calc_xp(@eng1)
 
-    Job.destroy_all
-    store_jobs(@eng1)
+    #Job.destroy_all
+    #store_jobs(@eng1)
+
+    gtask_store_jobs_for_DBengineers!(api)
 
     puts ''
     puts "wololo"
+  end
+end
+
+def gtask_store_jobs_for_DBengineers!(api)
+  Job.destroy_all
+  Engineer.all.each do |engineer| # make this paralel with Active Jobs
+    engineer_json = get_json(api+engineer["url"])
+    store_jobs(engineer_json)
+    puts "name: #{engineer.name} jobscount: #{engineer.jobs.count}"
   end
 end
 

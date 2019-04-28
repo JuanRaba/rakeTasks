@@ -1,0 +1,50 @@
+{"id"=>1, "name"=>"Chris Bosh", "jobs"=>[{"employer"=>"emp1", "start_date"=>"1990-02-22", "end_date"=>"1991-01-09"},
+ {"employer"=>"emp2", "start_date"=>"1990-10-02", "end_date"=>"1995-04-04"},
+ {"employer"=>"emp3", "start_date"=>"2000-03-18", "end_date"=>"2002-07-12"},
+ {"employer"=>"emp4", "start_date"=>"2000-03-19", "end_date"=>"2002-07-13"},
+ {"employer"=>"emp5", "start_date"=>"2009-05-01", "end_date"=>nil}]}
+[1, "Chris Bosh", 6245]
+
+{"id"=>2, "name"=>"Jack Dorsey", "jobs"=>[
+{"employer"=>"emp1", "start_date"=>"2001-04-13", "end_date"=>nil},
+
+{"employer"=>"emp2", "start_date"=>"2003-10-11", "end_date"=>"2003-10-12"},
+
+{"employer"=>"emp3", "start_date"=>"2012-05-01", "end_date"=>"2018-01-19"}]}
+[2, "Jack Dorsey", 6471]
+
+{"id"=>3, "name"=>"Bill Gates", "jobs"=>[
+{"employer"=>"emp1", "start_date"=>"1978-12-11", "end_date"=>"1990-11-09"},
+ {"employer"=>"emp2", "start_date"=>"2003-10-11", "end_date"=>"2003-10-12"},
+ {"employer"=>"emp3", "start_date"=>"2009-05-01", "end_date"=>"2011-01-19"},
+ {"employer"=>"emp4", "start_date"=>"2008-04-01", "end_date"=>"2016-01-04"}]}
+[3, "Bill Gates", 6791]
+
+{"id"=>4, "name"=>"Drew Houston", "jobs"=>[
+{"employer"=>"emp1", "start_date"=>"2019-04-01", "end_date"=>nil}]}
+[4, "Drew Houston", 0]
+
+{"id"=>5, "name"=>"Gabe Newell", "jobs"=>[
+{"employer"=>"emp1", "start_date"=>"2011-06-01", "end_date"=>"2011-06-02"}]}
+[5, "Gabe Newell", 1]
+
+{"id"=>6, "name"=>"Ruchi Sanghvi", "jobs"=>[
+{"employer"=>"emp1", "start_date"=>"2010-06-01", "end_date"=>"2010-06-02"}]}
+[6, "Ruchi Sanghvi", 1]
+
+{"id"=>7, "name"=>"Mark Zuckerberg", "jobs"=>[
+{"employer"=>"emp1", "start_date"=>"2002-02-01", "end_date"=>nil}]}
+[7, "Mark Zuckerberg", 6177]
+
+{"id"=>8, "name"=>"Linus Torvalds", "jobs"=>[
+{"employer"=>"emp1", "start_date"=>"1987-09-01", "end_date"=>nil}]}
+[8, "Linus Torvalds", 11444]
+
+{"id"=>9, "name"=>"Larry Page", "jobs"=>[
+{"employer"=>"emp1", "start_date"=>"1991-09-29", "end_date"=>"1997-03-20"},
+ {"employer"=>"emp1", "start_date"=>"1995-08-21", "end_date"=>"1997-12-25"},
+ {"employer"=>"emp1", "start_date"=>"1997-09-29", "end_date"=>"1999-11-02"},
+ {"employer"=>"emp1", "start_date"=>"2002-10-02", "end_date"=>"2009-03-20"},
+ {"employer"=>"emp1", "start_date"=>"2011-01-19", "end_date"=>nil},
+ {"employer"=>"emp1", "start_date"=>"2016-02-11", "end_date"=>"2016-03-18"}]}
+[9, "Larry Page", 8220]
