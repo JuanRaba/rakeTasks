@@ -1,6 +1,6 @@
 namespace :mytasks do
   desc "sample task"
-  task :sample do
+  task :sample => :environment do
     
     api = "https://demo0644754.mockable.io"  
     #@base = get_json( api+"/engineers" )
@@ -20,7 +20,11 @@ namespace :mytasks do
     print @base["engineers"].first.keys #["id", "name", "do_not_try_this"]
     puts ''
     @base["engineers"].each do |engineer|
-      puts engineer.values
+      Engineer.create!(
+        name: engineer["name"],
+        idorigin: engineer["id"],
+        url: engineer["do_not_try_this"]
+      )
     end
 
     eng1url = @base["engineers"].first["do_not_try_this"] #/engineers/1
@@ -40,28 +44,23 @@ namespace :mytasks do
     puts '' 
     print calc_xp(@eng1)
 
-    puts "get ready to ROCK"
-    puts "get ready to ROCK"
-    puts "get ready to ROCK"
-    puts ''
-    @base["engineers"].each do |engineer|
-      engUrl = engineer["do_not_try_this"]
-      @eng = get_json(api+engUrl)
-      puts @eng
-      print calc_xp(@eng)
-      puts ''
-    end
-
     puts ''
     puts "wololo"
   end
 end
 
-def get_json(url)
-  require "net/http"
-  url
-  sleep 16
-  JSON.parse(Net::HTTP.get_response(URI.parse(url)).body)
+def rock
+  puts "get ready to ROCK"
+  puts "get ready to ROCK"
+  puts "get ready to ROCK"
+  puts ''
+  @base["engineers"].each do |engineer|
+    engUrl = engineer["do_not_try_this"]
+    @eng = get_json(api+engUrl)
+    puts @eng
+    print calc_xp(@eng)
+    puts ''
+  end
 end
 
 # Calcs xp of an engineer with employement date ordered
@@ -108,4 +107,11 @@ def calc_xp(eng)
     end
   end
   [eng["id"],eng["name"],xp]
+end
+
+def get_json(url)
+  require "net/http"
+  url
+  sleep 16
+  JSON.parse(Net::HTTP.get_response(URI.parse(url)).body)
 end
