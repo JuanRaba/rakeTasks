@@ -24,7 +24,7 @@ namespace :mytasks do
     end
 
     eng1url = @base["engineers"].first["do_not_try_this"] #/engineers/1
-    @eng1 = get_json(api+eng1url)
+    #@eng1 = get_json(api+eng1url)
     @eng1 = {
       "id"=>1,
       "name"=>"Chris Bosh",
@@ -38,21 +38,21 @@ namespace :mytasks do
     }
     print @eng1["jobs"].first.keys # ["employer", "start_date", "end_date"]
     puts '' 
-    @eng1["jobs"].each do |job|
-      start_date = job["start_date"]
-      end_date = job["end_date"]
-      if end_date == nil
-        end_date = Date.today.to_s   
-      end
-      puts start_date + " " + end_date
+    print calc_xp(@eng1)
 
-      start_date = Date.parse start_date
-      end_date = Date.parse end_date 
-      puts start_date
-      puts end_date
-      puts (end_date - start_date).to_i
+    puts "get ready to ROCK"
+    puts "get ready to ROCK"
+    puts "get ready to ROCK"
+    puts ''
+    @base["engineers"].each do |engineer|
+      engUrl = engineer["do_not_try_this"]
+      @eng = get_json(api+engUrl)
+      puts @eng
+      print calc_xp(@eng)
+      puts ''
     end
 
+    puts ''
     puts "wololo"
   end
 end
@@ -60,5 +60,52 @@ end
 def get_json(url)
   require "net/http"
   url
-  #JSON.parse(Net::HTTP.get_response(URI.parse(url)).body)
+  sleep 16
+  JSON.parse(Net::HTTP.get_response(URI.parse(url)).body)
+end
+
+# Calcs xp of an engineer with employement date ordered
+def calc_xp(eng)
+  #initialize variables
+  xp = 0
+  day0 = "1970-01-01"
+  last_date = Date.parse day0
+  #config variable 
+  max_date_str = "2018-12-31"
+  max_date = Date.parse max_date_str
+
+  # ENSURE EMPLOYEMENT DATES AT THIS POINT  
+  eng["jobs"].each do |job|
+    # get data
+    start_date = job["start_date"]
+    end_date = job["end_date"]
+
+    # convert nil end and parse dates
+    start_date = Date.parse start_date
+    start_date = max_date if start_date > max_date
+
+    if end_date == nil
+      end_date = max_date_str # Date.today.to_s
+    end      
+    end_date = Date.parse end_date 
+    end_date = max_date if end_date > max_date   
+
+    # EMPLOYEMENT DATE MUST BE ORDERED AT THIS POINT
+    if last_date < start_date
+      #puts "added xp empl separated"
+      xp += (end_date - start_date).to_i
+      last_date = end_date
+    else
+      #puts "emp overlaped"
+      start_date = last_date  
+      if start_date < end_date
+        #puts "added xp as not overlaped with last end"
+        xp += (end_date - start_date).to_i
+        last_date = end_date
+      else
+        #puts "skiped xp cause overlaped"
+      end
+    end
+  end
+  [eng["id"],eng["name"],xp]
 end
