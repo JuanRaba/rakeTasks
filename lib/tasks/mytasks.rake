@@ -21,39 +21,25 @@ namespace :mytasks do
     puts ''
 
     store_engineers(@base)
-
-    eng1url = @base["engineers"].first["do_not_try_this"] #/engineers/1
-    #@eng1 = get_json(api+eng1url)
-    @eng1 = {
-      "id"=>1,
-      "name"=>"Chris Bosh",
-      "jobs"=>[
-        {"employer"=>"emp1", "start_date"=>"1990-02-22", "end_date"=>"1991-01-09"},
-        {"employer"=>"emp2", "start_date"=>"1990-10-02", "end_date"=>"1995-04-04"},
-        {"employer"=>"emp3", "start_date"=>"2000-03-18", "end_date"=>"2002-07-12"},
-        {"employer"=>"emp4", "start_date"=>"2000-03-19", "end_date"=>"2002-07-13"},
-        {"employer"=>"emp5", "start_date"=>"2009-05-01", "end_date"=>nil}
-      ]
-    }
-    print @eng1["jobs"].first.keys # ["employer", "start_date", "end_date"]
-    puts '' 
-    print calc_xp(@eng1)
-
-    #Job.destroy_all
-    #store_jobs(@eng1)
-
     #gtask_store_jobs_for_DBengineers!(api)
     gtask_calculatexp_for_DBengineers_fromDBjobs
+    show_success
 
     puts ''
     puts "wololo"
   end
 end
 
+def show_success
+  Engineer.all.each do |engineer| # make this paralel with Active Jobs
+    puts "#{engineer.id} #{engineer.name} #{engineer.idorigin} #{engineer.xp}"
+  end
+end
+
 def gtask_calculatexp_for_DBengineers_fromDBjobs
   Engineer.all.each do |engineer| # make this paralel with Active Jobs
-    xp = calc_xp_for_DBengineer(engineer)
-    puts "#{engineer.id} #{engineer.name} #{engineer.id} #{xp}"
+    engineer.xp = calc_xp_for_DBengineer(engineer)
+    engineer.save!
   end
 end
 
@@ -146,6 +132,26 @@ def rock
     print calc_xp(@eng)
     puts ''
   end
+end
+
+def test_calc_xp(base)
+  eng1url = base["engineers"].first["do_not_try_this"] #/engineers/1
+  #@eng1 = get_json(api+eng1url)
+  @eng1 = {
+    "id"=>1,
+    "name"=>"Chris Bosh",
+    "jobs"=>[
+      {"employer"=>"emp1", "start_date"=>"1990-02-22", "end_date"=>"1991-01-09"},
+      {"employer"=>"emp2", "start_date"=>"1990-10-02", "end_date"=>"1995-04-04"},
+      {"employer"=>"emp3", "start_date"=>"2000-03-18", "end_date"=>"2002-07-12"},
+      {"employer"=>"emp4", "start_date"=>"2000-03-19", "end_date"=>"2002-07-13"},
+      {"employer"=>"emp5", "start_date"=>"2009-05-01", "end_date"=>nil}
+    ]
+  }
+  print @eng1["jobs"].first.keys # ["employer", "start_date", "end_date"]
+  puts '' 
+  print calc_xp(@eng1)
+  puts ''
 end
 
 # Calcs xp of an engineer with employement date ordered
