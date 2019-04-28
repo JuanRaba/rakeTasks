@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  engineer: one
+  employer: MyString
+  start_date: 2019-04-28
+  end_date: 2019-04-28
+
+two:
+  engineer: two
+  employer: MyString
+  start_date: 2019-04-28
+  end_date: 2019-04-28

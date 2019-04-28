@@ -19,13 +19,8 @@ namespace :mytasks do
     }
     print @base["engineers"].first.keys #["id", "name", "do_not_try_this"]
     puts ''
-    @base["engineers"].each do |engineer|
-      Engineer.create!(
-        name: engineer["name"],
-        idorigin: engineer["id"],
-        url: engineer["do_not_try_this"]
-      )
-    end
+
+    store_engineers(@base)
 
     eng1url = @base["engineers"].first["do_not_try_this"] #/engineers/1
     #@eng1 = get_json(api+eng1url)
@@ -44,8 +39,32 @@ namespace :mytasks do
     puts '' 
     print calc_xp(@eng1)
 
+    Job.destroy_all
+    store_jobs(@eng1)
+
     puts ''
     puts "wololo"
+  end
+end
+
+def store_jobs(engineer_json)
+  engineer = Engineer.find_by(idorigin:engineer_json["id"])
+  engineer_json["jobs"].each do |job|
+    Job.create(
+        engineer: engineer,
+        employer: job["employer"],
+        start_date: job["start_date"],
+        end_date: job["end_date"]
+      )
+  end
+end
+def store_engineers(base)
+  base["engineers"].each do |engineer|
+    Engineer.create(
+      name: engineer["name"],
+      idorigin: engineer["id"],
+      url: engineer["do_not_try_this"]
+    )
   end
 end
 

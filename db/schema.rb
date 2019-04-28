@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_28_133848) do
+ActiveRecord::Schema.define(version: 2019_04_28_135242) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,4 +24,15 @@ ActiveRecord::Schema.define(version: 2019_04_28_133848) do
     t.index ["idorigin"], name: "index_engineers_on_idorigin", unique: true
   end
 
+  create_table "jobs", force: :cascade do |t|
+    t.bigint "engineer_id"
+    t.string "employer"
+    t.date "start_date"
+    t.date "end_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["engineer_id"], name: "index_jobs_on_engineer_id"
+  end
+
+  add_foreign_key "jobs", "engineers"
 end
