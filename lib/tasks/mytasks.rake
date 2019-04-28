@@ -36,10 +36,10 @@ namespace :mytasks do
         {"employer"=>"emp5", "start_date"=>"2009-05-01", "end_date"=>nil}
       ]
     }
-    print @eng1["jobs"].first.keys
+    print @eng1["jobs"].first.keys # ["employer", "start_date", "end_date"]
     puts '' 
     @eng1["jobs"].each do |job|
-      puts job.values
+      puts job["start_date"] + " " job["end_date"]
     end
     puts "wololo"
   end
