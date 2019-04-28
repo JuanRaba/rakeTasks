@@ -1,33 +1,14 @@
 namespace :mytasks do
   desc "sample task"
   task :sample => :environment do
-    
     api = "https://demo0644754.mockable.io"  
-    #@base = get_json( api+"/engineers" )
-    @base = {
-      "engineers"=>[
-        {"id"=>1, "name"=>"Chris Bosh", "do_not_try_this"=>"/engineers/1"},
-        {"id"=>2, "name"=>"Jack Dorsey", "do_not_try_this"=>"/engineers/2"},
-        {"id"=>3, "name"=>"Bill Gates", "do_not_try_this"=>"/engineers/3"},
-        {"id"=>4, "name"=>"Drew Houston", "do_not_try_this"=>"/engineers/4"},
-        {"id"=>5, "name"=>"Gabe Newell", "do_not_try_this"=>"/engineers/5"},
-        {"id"=>6, "name"=>"Ruchi Sanghvi", "do_not_try_this"=>"/engineers/6"},
-        {"id"=>7, "name"=>"Mark Zuckerberg", "do_not_try_this"=>"/engineers/7"},
-        {"id"=>8, "name"=>"Linus Torvalds", "do_not_try_this"=>"/engineers/8"},
-        {"id"=>9, "name"=>"Larry Page", "do_not_try_this"=>"/engineers/9"}
-      ]
-    }
-    print @base["engineers"].first.keys #["id", "name", "do_not_try_this"]
-    puts ''
-
+    
+    @base = get_json( api+"/engineers" )
     store_engineers(@base)
-    #gtask_store_jobs_for_DBengineers!(api)
+    gtask_store_jobs_for_DBengineers!(api)
     gtask_calculatexp_for_DBengineers_fromDBjobs
-    #show_success
     generate_ranking2018csv(Rails.root) # nosotros dejemos el ranking en su ftp)
-
-    puts ''
-    puts "wololo"
+    puts "ranking2018csv generated in Rails.root"
   end
 end
 
