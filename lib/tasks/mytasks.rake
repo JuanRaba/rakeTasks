@@ -23,11 +23,36 @@ namespace :mytasks do
     store_engineers(@base)
     #gtask_store_jobs_for_DBengineers!(api)
     gtask_calculatexp_for_DBengineers_fromDBjobs
-    show_success
+    #show_success
+    generate_ranking2018csv(Rails.root) # nosotros dejemos el ranking en su ftp)
 
     puts ''
     puts "wololo"
   end
+end
+
+def generate_ranking2018csv(destination)
+  #######ranking2018.csv###########
+  # "ranking", 
+  #{ "engineers": 
+  #  [ 
+  #    { "name": "nombre", "work experience_days": 1234 },
+  #    { "name": "nombre", "work experience_days": 1234 }...
+  #  ] 
+  #}
+  engineers_text = ""
+  Engineer.all.order(xp: :desc).map do |engineer|
+    engineers_text += "{ \"name\": \"#{engineer.name}\", \"work experience_days\": #{engineer.xp} },"
+  end
+  full_text = "{ \"engineers\": [#{engineers_text}]}"
+  full_text_doble_quoted = full_text.gsub('"','""')
+  
+  csv_text = "\"ranking\", \"#{full_text}\""
+  puts csv_text
+  File.open(
+    File.join(destination, 'ranking2018.csv'),
+    'w'
+  ) { |file| file.write(csv_text) }
 end
 
 def show_success
