@@ -1,6 +1,6 @@
 class Engineer < ApplicationRecord
   validates :idorigin, uniqueness: true
-  has_many :jobs
+  has_many :jobs, dependent: :destroy
   # class method to load
   def self.get_and_store_engineers(api)
     base_json = ApplicationHelper.get_json( api+"/engineers" )
@@ -22,6 +22,15 @@ class Engineer < ApplicationRecord
 
   def self.calculate_and_store_xp
     Engineer.all.each do |engineer| # make this paralel with Active Jobs
+      engineer.set_xp
+      engineer.save!
+    end
+  end
+
+  def self.get_and_store_jobs_and_calculate_and_store_xp!(api)
+    Job.destroy_all
+    Engineer.all.each do |engineer|
+      engineer.get_and_store_jobs(api)
       engineer.set_xp
       engineer.save!
     end
@@ -83,7 +92,7 @@ class Engineer < ApplicationRecord
       start_date = job["start_date"]
       end_date = job["end_date"]
 
-      start_date = max_date if start_date > max_date
+      start_date = max_date + 1.days if start_date > max_date
 
       if end_date == nil
         end_date = max_date # Date.today.to_s
@@ -93,7 +102,7 @@ class Engineer < ApplicationRecord
       # EMPLOYEMENT DATE MUST BE ORDERED AT THIS POINT
       if last_date < start_date
         #puts "added xp empl separated"
-        xp += (end_date - start_date).to_i
+        xp += (end_date - start_date).to_i + 1
         last_date = end_date
       else
         #puts "emp overlaped"

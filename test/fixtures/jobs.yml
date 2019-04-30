@@ -1,13 +1,47 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
+# future-engineer
 one:
   engineer: one
   employer: MyString
   start_date: 2019-04-28
   end_date: 2019-04-28
 
+# separated-engineer
 two:
   engineer: two
   employer: MyString
-  start_date: 2019-04-28
-  end_date: 2019-04-28
+  start_date: 2000-01-01
+  end_date: 2000-01-10
+
+three:
+  engineer: two
+  employer: MyString
+  start_date: 2000-01-11
+  end_date: 2000-01-20
+
+# changing-engineer
+four:
+  engineer: three
+  employer: MyString
+  start_date: 2000-01-01
+  end_date: 2000-01-10
+
+five:
+  engineer: three
+  employer: MyString
+  start_date: 2000-01-05
+  end_date: 2000-01-20
+
+# overlped-engineer
+six:
+  engineer: four
+  employer: MyString
+  start_date: 2000-01-01
+  end_date: 2000-01-10
+
+seven:
+  engineer: four
+  employer: MyString
+  start_date: 2000-01-03
+  end_date: 2000-01-09

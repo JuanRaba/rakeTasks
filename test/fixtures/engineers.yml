@@ -1,11 +1,25 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  url: MyString
+  name: "future-engineer"
+  url: "url"
   idorigin: 1
+  xp: 0
 
 two:
-  name: MyString
-  url: MyString
-  idorigin: 1
+  name: "separated-engineer"
+  url: "url"
+  idorigin: 2
+  xp: 0
+
+three:
+  name: "changing-engineer"
+  url: "url"
+  idorigin: 3
+  xp: 0
+
+four:
+  name: "overlped-engineer"
+  url: "url"
+  idorigin: 4
+  xp: 0
