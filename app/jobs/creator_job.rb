@@ -1,7 +1,5 @@
 class CreatorJob
-  def perform
-    api = "https://demo0644754.mockable.io"
-
+  def perform(api)
     batch = Sidekiq::Batch.new
     batch.description = "Creating"
     batch.on(:success, CreatorJob::Created, {'wololo' => 2})

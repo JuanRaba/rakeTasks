@@ -1,24 +1,17 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+* Deployment instructions
+    download
+    rail db:create
+    rails db:migrate
 
-Things you may want to cover:
+* Services
+    If using async task will need redis, start running "sidekiq"
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
+* Rake task (choose one)
+    1) Asyncronous:     rake mytasks:jobrunner
+    2) Syncronous:      rake mytasks:sample
+    Notice: Use [] if want to use personal api i.e: rake mytasks:sample["https://demo#####.mockable.io"]
 
 * How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+    rails test -b test/models/engineer_test.rb
