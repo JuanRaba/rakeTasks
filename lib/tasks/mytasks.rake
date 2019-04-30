@@ -8,4 +8,9 @@ namespace :mytasks do
     Engineer.generate_ranking2018csv(Rails.root) # nosotros dejemos el ranking en su ftp)
     puts "ranking2018csv generated in Rails.root"
   end
+
+  task :jobrunner => :environment do
+    CreatorJob.new.perform
+    puts "Launched"
+  end
 end
